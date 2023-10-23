@@ -44,7 +44,7 @@ class _MyHomePageState extends State<HomePage> {
       style: optionStyle,
     ),
     Text(
-      'Index 2: Profil',
+      'Index 2: Profili',
       style: optionStyle,
     ),
   ];
