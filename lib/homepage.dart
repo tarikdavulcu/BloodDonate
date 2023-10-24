@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kanbagisla/addetail.dart';
 import 'package:kanbagisla/drawer.dart';
+import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/login.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,6 +29,7 @@ class _HomeScreen extends State<HomePage> {
                   action: SnackBarAction(
                     label: 'Evet',
                     onPressed: () {
+                      userLogout();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const Login()));
                     },

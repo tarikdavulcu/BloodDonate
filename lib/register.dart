@@ -1,58 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
-import 'package:kanbagisla/main.dart';
-import 'package:kanbagisla/passwordReset.dart';
-import 'package:kanbagisla/register.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:kanbagisla/login.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Kan Bağışla',
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(title: 'Kan Bağışla'),
-    );
-  }
-}
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<LoginPage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<LoginPage> {
+class _RegisterState extends State<Register> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -180,17 +143,6 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // userPasswordRecovery();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => PasswordReset()));
-              },
-              child: const Text(
-                'Şifremi Unuttum',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-            ),
             Container(
               height: 50,
               width: 250,
@@ -198,14 +150,8 @@ class _MyHomePageState extends State<LoginPage> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
                 onPressed: () {
-                  userLogin(_emailController.text.trim().toString(),
+                  userCreate(_emailController.text.trim().toString(),
                       _passwordController.text.trim().toString());
-                  final TokenList list = TokenList();
-                  final item = TokenItem(token: "token".toString());
-                  list.items.add(item);
-                  final LocalStorage storage = LocalStorage('todo_app.json');
-                  storage.clear();
-                  storage.setItem('todos', list.toJSONEncodable());
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -214,31 +160,8 @@ class _MyHomePageState extends State<LoginPage> {
                               )));
                 },
                 child: const Text(
-                  'Giriş',
+                  'Kayıt Ol',
                   style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsetsDirectional.all(10),
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(50)),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (_) => const HomePage(
-                  //               title: 'Kan Bağışla',
-                  //             )));
-                  // googleSignIn();
-                  Authentication.signInWithGoogle(context: context);
-                },
-                child: const Text(
-                  'Google Giriş',
                 ),
               ),
             ),
@@ -247,18 +170,16 @@ class _MyHomePageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const Register()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => const Login()));
               },
               child: const Text(
-                'Kayıt Ol',
+                'Giriş Yap',
               ),
             ),
           ],
         ),
       ),
     );
-
-    // This trailing comma makes auto-formatting nicer for build methods.
   }
 }

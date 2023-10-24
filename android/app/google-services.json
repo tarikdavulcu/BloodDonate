@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "21352098080",
+    "firebase_url": "https://blooddonor-0935-default-rtdb.firebaseio.com",
+    "project_id": "blooddonor-0935",
+    "storage_bucket": "blooddonor-0935.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21352098080:android:3a2b942a1d93cb7ef08f45",
+        "android_client_info": {
+          "package_name": "com.turkiye.kanbagisi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21352098080-d0rc0qvuhvll8bf8hhf3b0v1g8l8f53r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAkoUi033jhQFmpTfVgf1Sqponzz8oHh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21352098080-d0rc0qvuhvll8bf8hhf3b0v1g8l8f53r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21352098080-aklomc57dufo9opercfdn3oe57rt2obk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kanbagisla"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

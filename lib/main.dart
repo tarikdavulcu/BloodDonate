@@ -153,16 +153,53 @@
 //   }
 // }
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
-
+import 'package:localstorage/localstorage.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+class TokenItem {
+  String token;
+
+  TokenItem({required this.token});
+
+  toJSONEncodable() {
+    Map<String, dynamic> m = {};
+
+    m['token'] = token;
+
+    return m;
+  }
+}
+
+class TokenList {
+  List<TokenItem> items = [];
+
+  toJSONEncodable() {
+    return items.map((item) {
+      return item.toJSONEncodable();
+    }).toList();
+  }
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final LocalStorage storage = LocalStorage('todo_app.json');
+  var items = storage.getItem('todos');
+  userStateControl(items);
+  //userLogin();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
