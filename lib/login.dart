@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
-import 'package:kanbagisla/main.dart';
 import 'package:kanbagisla/passwordReset.dart';
 import 'package:kanbagisla/register.dart';
 import 'package:localstorage/localstorage.dart';
@@ -197,21 +197,23 @@ class _MyHomePageState extends State<LoginPage> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
-                onPressed: () {
-                  userLogin(_emailController.text.trim().toString(),
-                      _passwordController.text.trim().toString());
-                  final TokenList list = TokenList();
-                  final item = TokenItem(token: "token".toString());
-                  list.items.add(item);
-                  final LocalStorage storage = LocalStorage('todo_app.json');
+                onPressed: () async {
+                  var rrr = await signInUsingEmailPassword(
+                      email: _emailController.text.toString(),
+                      password: _passwordController.text.trim().toString(),
+                      context: context);
+
+                  final LocalStorage storage = LocalStorage('key');
+
                   storage.clear();
-                  storage.setItem('todos', list.toJSONEncodable());
+
+                  storage.setItem('token', rrr);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const HomePage(
-                                title: 'Kan Bağışla',
-                              )));
+                        builder: (_) =>
+                            HomePage(title: 'Kan Bağışla', usr: rrr),
+                      ));
                 },
                 child: const Text(
                   'Giriş',
@@ -219,29 +221,15 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsetsDirectional.all(10),
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(50)),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (_) => const HomePage(
-                  //               title: 'Kan Bağışla',
-                  //             )));
-                  // googleSignIn();
-                  Authentication.signInWithGoogle(context: context);
-                },
-                child: const Text(
-                  'Google Giriş',
-                ),
-              ),
-            ),
+            Padding(
+                padding: EdgeInsets.all(10.0),
+                child: SignInButton(
+                  Buttons.Google,
+                  text: "Google ile Giriş",
+                  onPressed: () {
+                    Authentication.signInWithGoogle(context: context);
+                  },
+                )),
             const SizedBox(
               height: 130,
             ),

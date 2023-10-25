@@ -1,12 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kanbagisla/addetail.dart';
 import 'package:kanbagisla/drawer.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/login.dart';
+import 'package:localstorage/localstorage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+  const HomePage({super.key, required this.title, required this.usr});
   final String title;
+  final User? usr;
   @override
   State<HomePage> createState() => _HomeScreen();
 }
@@ -14,6 +17,9 @@ class HomePage extends StatefulWidget {
 class _HomeScreen extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final LocalStorage storage = LocalStorage('key');
+
+    User? token = storage.getItem('token');
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: AppBar(
@@ -22,7 +28,7 @@ class _HomeScreen extends State<HomePage> {
           //IconButton
           IconButton(
             icon: const Icon(Icons.logout),
-            tooltip: 'Çıkış Yap',
+            tooltip: token?.uid.toString(),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

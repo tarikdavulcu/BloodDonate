@@ -157,6 +157,7 @@ class _RegisterState extends State<Register> {
                       MaterialPageRoute(
                           builder: (_) => const HomePage(
                                 title: 'Kan Bağışla',
+                                usr: null,
                               )));
                 },
                 child: const Text(

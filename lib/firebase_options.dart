@@ -83,21 +83,33 @@ class DefaultFirebaseOptions {
 }
 
 late final FirebaseAuth auth;
-Future<void> userCreate(String email, String password) async {
-  auth.createUserWithEmailAndPassword(email: email, password: password);
+Future<User?> signInUsingEmailPassword({
+  required String email,
+  required String password,
+  required BuildContext context,
+}) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+
+  try {
+    UserCredential userCredential = await auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    user = userCredential.user;
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided.');
+    }
+  }
+
+  return user;
 }
 
-Future<String?> userLogin(String email, String password) async {
-  FirebaseApp app = await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  auth = FirebaseAuth.instanceFor(app: app);
-  auth
-      .signInWithEmailAndPassword(email: email, password: password)
-      .then((value) {
-    return value.user?.uid.toString();
-  });
-  return null;
+Future<void> userCreate(String email, String password) async {
+  auth.createUserWithEmailAndPassword(email: email, password: password);
 }
 
 Future<void> userStateControl(dynamic token) async {

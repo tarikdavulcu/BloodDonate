@@ -1,47 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kanbagisla/homepage.dart';
 import 'package:kanbagisla/profile.dart';
 import 'package:kanbagisla/rankinglist.dart';
 import 'package:kanbagisla/settings.dart';
+import 'package:localstorage/localstorage.dart';
 
 class NavDrawer extends StatelessWidget {
-  const NavDrawer({super.key});
+  const NavDrawer({super.key, User? token});
 
   @override
   Widget build(BuildContext context) {
+    final LocalStorage storage = LocalStorage('key');
+
+    User? token = storage.getItem('token');
+
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.50,
-        child:
-            // Drawer(
-            //   child: Container(
-            //     color: Colors.blue,
-            //     child: ListView(
-            //       children: <Widget>[
-            //         ListTile(
-            //           title: const Text('Home'),
-            //           textColor: Colors.white,
-            //           trailing: const Icon(
-            //             Icons.home,
-            //             color: Colors.white,
-            //           ),
-            //           onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            //               builder: (context) => const HomeScreen(title: "Home"))),
-            //         ),
-            //         ListTile(
-            //           title: const Text('Ayarlar'),
-            //           textColor: Colors.white,
-            //           trailing: const Icon(
-            //             Icons.info_rounded,
-            //             color: Colors.white,
-            //           ),
-            //           onTap: () => Navigator.of(context).push(
-            //               MaterialPageRoute(builder: (context) => const Settings())),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            Drawer(
+        child: Drawer(
           child: ListView(
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
@@ -70,7 +46,8 @@ class NavDrawer extends StatelessWidget {
                 onTap: () {
                   // Navigator.pop(context);
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HomePage(title: "İlanlar")));
+                      builder: (context) =>
+                          const HomePage(title: "İlanlar", usr: null)));
                 },
               ),
               ListTile(

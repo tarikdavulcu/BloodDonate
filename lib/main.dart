@@ -153,35 +153,14 @@
 //   }
 // }
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:flutter/material.dart';
-
-class TokenItem {
-  String token;
-
-  TokenItem({required this.token});
-
-  toJSONEncodable() {
-    Map<String, dynamic> m = {};
-
-    m['token'] = token;
-
-    return m;
-  }
-}
-
-class TokenList {
-  List<TokenItem> items = [];
-
-  toJSONEncodable() {
-    return items.map((item) {
-      return item.toJSONEncodable();
-    }).toList();
-  }
-}
+import 'package:kanbagisla/login.dart';
+import 'package:localstorage/localstorage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -189,9 +168,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final LocalStorage storage = LocalStorage('todo_app.json');
-  var items = storage.getItem('todos');
-  userStateControl(items);
+  // userStateControl(items);
   //userLogin();
 
   runApp(const MyApp());
@@ -200,15 +177,26 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    print("BACK BUTTON!"); // Do some stuff.
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // BackButtonInterceptor.add(myInterceptor);
+    BackButtonInterceptor.add(myInterceptor, zIndex: 2, name: "SomeName");
+    final LocalStorage storage = LocalStorage('key');
+
+    User? token = storage.getItem('token');
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Navigation Drawer Tutorial',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(title: 'Home'),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Navigation Drawer Tutorial',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: token != null
+            ? const HomePage(title: 'Kan Bagışla', usr: null)
+            : const Login());
   }
 }
