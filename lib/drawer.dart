@@ -13,7 +13,7 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final LocalStorage storage = LocalStorage('key');
 
-    User? token = storage.getItem('token');
+    User? user = storage.getItem('token');
 
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.50,
@@ -22,21 +22,21 @@ class NavDrawer extends StatelessWidget {
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
-              const UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Color(0xff764abc)),
+              UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(color: Color(0xff764abc)),
                 accountName: Text(
-                  "Tarık Davulcu",
-                  style: TextStyle(
+                  user!.uid.toString(),
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 accountEmail: Text(
-                  "tarikdavulcu@gmail.com",
-                  style: TextStyle(
+                  user.email.toString(),
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                currentAccountPicture: FlutterLogo(),
+                currentAccountPicture: const FlutterLogo(),
               ),
               ListTile(
                 leading: const Icon(
