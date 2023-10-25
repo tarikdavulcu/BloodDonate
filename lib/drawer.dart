@@ -47,7 +47,7 @@ class NavDrawer extends StatelessWidget {
                   // Navigator.pop(context);
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) =>
-                          const HomePage(title: "İlanlar", usr: null)));
+                          HomePage(title: "İlanlar", usr: user)));
                 },
               ),
               ListTile(

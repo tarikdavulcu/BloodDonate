@@ -37,7 +37,9 @@ class _HomeScreen extends State<HomePage> {
                     onPressed: () {
                       userLogout();
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Login()));
+                          builder: (context) => LoginPage(
+                                onTap: () {},
+                              )));
                     },
                   ),
                   content: const Text('Çıkmak İstiyor Musun?'),

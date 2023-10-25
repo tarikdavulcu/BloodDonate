@@ -155,6 +155,7 @@
 
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kanbagisla/custom_animation.dart';
@@ -211,13 +212,13 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Navigation Drawer Tutorial',
+      title: 'Navigation Drawer',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: user != null
-          ? const HomePage(title: 'Kan Bagışla', usr: null)
-          : const Login(),
+          ? HomePage(title: 'Kan Bagışla', usr: user)
+          : LoginPage(onTap: () => {}),
       builder: EasyLoading.init(),
     );
   }

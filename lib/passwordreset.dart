@@ -124,7 +124,9 @@ class PasswordReset extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => const Login(),
+                                builder: (_) => LoginPage(
+                                  onTap: () {},
+                                ),
                               ));
                           EasyLoading.dismiss();
                         } else {
