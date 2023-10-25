@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
@@ -53,6 +54,7 @@ class _MyHomePageState extends State<LoginPage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -180,18 +182,8 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // userPasswordRecovery();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => PasswordReset()));
-              },
-              child: const Text(
-                'Şifremi Unuttum',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-            ),
             Container(
+              margin: EdgeInsets.all(10),
               height: 50,
               width: 250,
               decoration: BoxDecoration(
@@ -208,12 +200,14 @@ class _MyHomePageState extends State<LoginPage> {
                   storage.clear();
 
                   storage.setItem('token', rrr);
+                  EasyLoading.show(status: 'loading...');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) =>
                             HomePage(title: 'Kan Bağışla', usr: rrr),
                       ));
+                  EasyLoading.dismiss();
                 },
                 child: const Text(
                   'Giriş',
@@ -221,8 +215,26 @@ class _MyHomePageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Padding(
-                padding: EdgeInsets.all(10.0),
+            Container(
+              height: 50,
+              width: 250,
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              child: ElevatedButton(
+                onPressed: () {
+                  // userPasswordRecovery();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => PasswordReset()));
+                },
+                child: const Text(
+                  'Şifremi Unuttum',
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                ),
+              ),
+            ),
+            Container(
+                padding: const EdgeInsets.all(10.0),
                 child: SignInButton(
                   Buttons.Google,
                   text: "Google ile Giriş",
@@ -230,16 +242,20 @@ class _MyHomePageState extends State<LoginPage> {
                     Authentication.signInWithGoogle(context: context);
                   },
                 )),
-            const SizedBox(
-              height: 130,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const Register()));
-              },
-              child: const Text(
-                'Kayıt Ol',
+            Container(
+              height: 50,
+              width: 250,
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const Register()));
+                },
+                child: const Text(
+                  'Kayıt Ol',
+                ),
               ),
             ),
           ],

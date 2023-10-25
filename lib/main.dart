@@ -156,6 +156,8 @@
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:kanbagisla/custom_animation.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
 import 'package:flutter/material.dart';
@@ -172,6 +174,24 @@ Future<void> main() async {
   //userLogin();
 
   runApp(const MyApp());
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false
+    ..customAnimation = CustomAnimation();
 }
 
 class MyApp extends StatelessWidget {
@@ -187,16 +207,18 @@ class MyApp extends StatelessWidget {
     // BackButtonInterceptor.add(myInterceptor);
     BackButtonInterceptor.add(myInterceptor, zIndex: 2, name: "SomeName");
     final LocalStorage storage = LocalStorage('key');
+    User? user = storage.getItem('token');
 
-    User? token = storage.getItem('token');
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Navigation Drawer Tutorial',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: token != null
-            ? const HomePage(title: 'Kan Bagışla', usr: null)
-            : const Login());
+      debugShowCheckedModeBanner: false,
+      title: 'Navigation Drawer Tutorial',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: user != null
+          ? const HomePage(title: 'Kan Bagışla', usr: null)
+          : const Login(),
+      builder: EasyLoading.init(),
+    );
   }
 }

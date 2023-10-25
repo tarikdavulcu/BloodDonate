@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/login.dart';
 
@@ -115,6 +116,8 @@ class PasswordReset extends StatelessWidget {
                     color: Colors.limeAccent,
                     child: MaterialButton(
                       onPressed: () async {
+                        EasyLoading.show(status: 'loading...');
+
                         if (_key.currentState!.validate()) {
                           userPasswordRecovery(_emailController.text.trim());
 
@@ -123,6 +126,9 @@ class PasswordReset extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (_) => const Login(),
                               ));
+                          EasyLoading.dismiss();
+                        } else {
+                          EasyLoading.dismiss();
                         }
                       },
                       minWidth: double.infinity,

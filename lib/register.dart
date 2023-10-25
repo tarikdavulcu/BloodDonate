@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
 import 'package:kanbagisla/login.dart';
@@ -160,6 +161,7 @@ class _RegisterState extends State<Register> {
                   storage.clear();
 
                   storage.setItem('token', rrr);
+                  EasyLoading.show(status: 'loading...');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -167,6 +169,7 @@ class _RegisterState extends State<Register> {
                                 title: 'Kan Bağışla',
                                 usr: rrr,
                               )));
+                  EasyLoading.dismiss();
                 },
                 child: const Text(
                   'Kayıt Ol',
