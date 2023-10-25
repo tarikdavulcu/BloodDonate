@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/homepage.dart';
 import 'package:kanbagisla/login.dart';
+import 'package:localstorage/localstorage.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -149,15 +150,22 @@ class _RegisterState extends State<Register> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
-                onPressed: () {
-                  userCreate(_emailController.text.trim().toString(),
-                      _passwordController.text.trim().toString());
+                onPressed: () async {
+                  var rrr = await createUserWithEmailAndPassword(
+                      email: _emailController.text.trim().toString(),
+                      password: _passwordController.text.trim().toString(),
+                      context: context);
+                  final LocalStorage storage = LocalStorage('key');
+
+                  storage.clear();
+
+                  storage.setItem('token', rrr);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const HomePage(
+                          builder: (_) => HomePage(
                                 title: 'Kan Bağışla',
-                                usr: null,
+                                usr: rrr,
                               )));
                 },
                 child: const Text(

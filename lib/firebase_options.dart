@@ -108,8 +108,29 @@ Future<User?> signInUsingEmailPassword({
   return user;
 }
 
-Future<void> userCreate(String email, String password) async {
-  auth.createUserWithEmailAndPassword(email: email, password: password);
+Future<User?> createUserWithEmailAndPassword({
+  required String email,
+  required String password,
+  required BuildContext context,
+}) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+
+  try {
+    UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    user = userCredential.user;
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided.');
+    }
+  }
+
+  return user;
 }
 
 Future<void> userStateControl(dynamic token) async {
@@ -123,6 +144,7 @@ Future<void> userStateControl(dynamic token) async {
 }
 
 Future<bool> userPasswordRecovery(String email) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
   bool sending = false;
   auth.sendPasswordResetEmail(email: email);
   sending = true;

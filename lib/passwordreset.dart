@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kanbagisla/firebase_options.dart';
+import 'package:kanbagisla/login.dart';
 
 class PasswordReset extends StatelessWidget {
   final _key = GlobalKey<FormState>();
@@ -115,8 +116,13 @@ class PasswordReset extends StatelessWidget {
                     child: MaterialButton(
                       onPressed: () async {
                         if (_key.currentState!.validate()) {
-                          final _status = userPasswordRecovery(
-                              _emailController.text.trim());
+                          userPasswordRecovery(_emailController.text.trim());
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const Login(),
+                              ));
                         }
                       },
                       minWidth: double.infinity,
