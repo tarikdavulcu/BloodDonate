@@ -46,6 +46,7 @@ class LoginPage extends StatefulWidget {
 class _MyHomePageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -55,8 +56,9 @@ class _MyHomePageState extends State<LoginPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
+    return Container(
+      key: _formKey,
+      child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Padding(

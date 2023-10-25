@@ -43,6 +43,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   back_button_interceptor: ^7.0.0
   flutter_easyloading: ^3.0.5
+  flutter_svg: ^2.0.8
 
 dev_dependencies:
   flutter_test:
