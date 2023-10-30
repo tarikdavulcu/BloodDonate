@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "21352098080-hgegtvtohttl0vvkmlnuf5v4g42gkmqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.turkiye.kanbagisi",
+            "certificate_hash": "13e537d85a5aba8b6aa08c706cafa88e85a82198"
+          }
+        },
+        {
           "client_id": "21352098080-d0rc0qvuhvll8bf8hhf3b0v1g8l8f53r.apps.googleusercontent.com",
           "client_type": 3
         }

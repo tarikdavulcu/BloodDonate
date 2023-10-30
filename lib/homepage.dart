@@ -21,61 +21,61 @@ class _HomeScreenState extends State<HomePage> {
       'name': 'Ahmet',
       'bloodType': 'A+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Deniz',
       'bloodType': 'B+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Tarık',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Hasan',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Faruk',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Ayşe',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Fatma',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Kaan',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Hüseyin',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     {
       'name': 'Ali',
       'bloodType': 'AB+',
       'image':
-      'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
+          'https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg',
     },
     // Daha fazla donör ekleyebilirsiniz
   ];
@@ -117,10 +117,8 @@ class _HomeScreenState extends State<HomePage> {
           ),
         ],
       ),
-
       body: Column(
         children: <Widget>[
-
           Card(
             child: Column(
               children: <Widget>[
@@ -140,37 +138,36 @@ class _HomeScreenState extends State<HomePage> {
                       .skip(rowIndex * 2)
                       .take(3)
                       .map((donor) => Expanded(
-                    child: Card(
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            height: 100.0, // Kartın yüksekliği buradan ayarlandı
-                            child: Image.network(
-                              donor['image']!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Text(donor['name']!),
-                          Text(donor['bloodType']!),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AdDetail(
-                                    title: donor['name']!,
+                            child: Card(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    height:
+                                        100.0, // Kartın yüksekliği buradan ayarlandı
+                                    child: Image.network(
+                                      donor['image']!,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                            child: const Text('Detay'),
-                          ),
-
-                        ],
-
-                      ),
-                    ),
-                  ))
+                                  Text(donor['name']!),
+                                  Text(donor['bloodType']!),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => AdDetail(
+                                            title: donor['name']!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text('Detay'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ))
                       .toList(),
                 );
               },
@@ -206,35 +203,36 @@ class _HomeScreenState extends State<HomePage> {
                       .skip(rowIndex * 2)
                       .take(3)
                       .map((donor) => Expanded(
-                    child: Card(
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            height: 100.0, // Kartın yüksekliği buradan ayarlandı
-                            child: Image.network(
-                              donor['image']!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Text(donor['name']!),
-                          Text(donor['bloodType']!),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AdDetail(
-                                    title: donor['name']!,
+                            child: Card(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    height:
+                                        100.0, // Kartın yüksekliği buradan ayarlandı
+                                    child: Image.network(
+                                      donor['image']!,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                            child: const Text('Detay'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ))
+                                  Text(donor['name']!),
+                                  Text(donor['bloodType']!),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => AdDetail(
+                                            title: donor['name']!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text('Detay'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ))
                       .toList(),
                 );
               },
@@ -253,8 +251,6 @@ class _HomeScreenState extends State<HomePage> {
           ),
         ],
       ),
-
-
     );
   }
 }
@@ -295,4 +291,3 @@ class AllDonorsPage extends StatelessWidget {
     );
   }
 }
-

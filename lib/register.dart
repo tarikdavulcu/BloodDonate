@@ -367,7 +367,25 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     //google buttom
                     SquareTile(
-                      onTap: () => AuthService().signInWithGoogle(),
+                      onTap: () async {
+                        User? result = await AuthService.signInWithGoogle();
+                        if (result != null) {
+                          final LocalStorage storage = LocalStorage('key');
+
+                          storage.clear();
+
+                          storage.setItem('token', result);
+                          //pop the loading circle
+                          // Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => HomePage(
+                                        title: "Kan Bağışla",
+                                        usr: result,
+                                      )));
+                        }
+                      },
                       imagePath: 'lib/icons/google.svg',
                       height: 70,
                     ),

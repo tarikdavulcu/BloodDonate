@@ -24,19 +24,28 @@ class NavDrawer extends StatelessWidget {
             children: [
               UserAccountsDrawerHeader(
                 decoration: const BoxDecoration(color: Color(0xff764abc)),
-                accountName: Text(
-                  user!.uid.toString(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                accountName: user!.displayName == null
+                    ? Text(
+                        user!.uid.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : Text(
+                        user!.displayName.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                 accountEmail: Text(
                   user.email.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                currentAccountPicture: const FlutterLogo(),
+                currentAccountPicture: user!.photoURL == null
+                    ? const FlutterLogo()
+                    : Image.network(user!.photoURL.toString()),
               ),
               ListTile(
                 leading: const Icon(
