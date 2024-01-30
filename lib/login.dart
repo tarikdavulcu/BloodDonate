@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       storage.setItem('token', rrr.user);
       //pop the loading circle
       // Navigator.pop(context);
+      // ignore: use_build_context_synchronously
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -54,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   )));
     } on FirebaseAuthException catch (e) {
       //pop the loading circle
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
 
       genericErrorMessage(e.code);
@@ -212,6 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                           storage.setItem('token', result);
                           //pop the loading circle
                           // Navigator.pop(context);
+                          // ignore: use_build_context_synchronously
                           Navigator.push(
                               context,
                               MaterialPageRoute(

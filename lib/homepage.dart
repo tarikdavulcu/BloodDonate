@@ -5,13 +5,13 @@ import 'package:kanbagisla/bloodcity.dart';
 import 'package:kanbagisla/drawer.dart';
 import 'package:kanbagisla/firebase_options.dart';
 import 'package:kanbagisla/login.dart';
-import 'package:localstorage/localstorage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title, required this.usr});
+  const HomePage({super.key, required this.title, required this.usr});
   final String title;
   final User? usr;
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomePage> {
       ),
       body: Column(
         children: <Widget>[
-          Card(
+          const Card(
             child: Column(
               children: <Widget>[
                 ListTile(
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomePage> {
                             child: Card(
                               child: Column(
                                 children: <Widget>[
-                                  Container(
+                                  SizedBox(
                                     height:
                                         100.0, // Kartın yüksekliği buradan ayarlandı
                                     child: Image.network(
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomePage> {
             },
             child: const Text('Tümünü Gör'),
           ),
-          Card(
+          const Card(
             child: Column(
               children: <Widget>[
                 ListTile(
@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomePage> {
                             child: Card(
                               child: Column(
                                 children: <Widget>[
-                                  Container(
+                                  SizedBox(
                                     height:
                                         100.0, // Kartın yüksekliği buradan ayarlandı
                                     child: Image.network(
@@ -258,7 +258,7 @@ class _HomeScreenState extends State<HomePage> {
 class AllDonorsPage extends StatelessWidget {
   final List<Map<String, String>> donors;
 
-  AllDonorsPage({required this.donors});
+  const AllDonorsPage({super.key, required this.donors});
 
   @override
   Widget build(BuildContext context) {

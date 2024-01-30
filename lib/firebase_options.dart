@@ -98,8 +98,10 @@ Future<User?> signInUsingEmailPassword({
     user = userCredential.user;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
+      // ignore: avoid_print
       print('No user found for that email.');
     } else if (e.code == 'wrong-password') {
+      // ignore: avoid_print
       print('Wrong password provided.');
     }
   }
@@ -123,8 +125,10 @@ Future<User?> createUserWithEmailAndPassword({
     user = userCredential.user;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
+      // ignore: avoid_print
       print('No user found for that email.');
     } else if (e.code == 'wrong-password') {
+      // ignore: avoid_print
       print('Wrong password provided.');
     }
   }
@@ -135,8 +139,10 @@ Future<User?> createUserWithEmailAndPassword({
 Future<void> userStateControl(dynamic token) async {
   auth.authStateChanges().listen((User? user) {
     if (user == null) {
+      // ignore: avoid_print
       print('User is currently signed out!');
     } else {
+      // ignore: avoid_print
       print('User is signed in!');
     }
   });
@@ -152,6 +158,7 @@ Future<bool> userPasswordRecovery(String email) async {
 
 Future<void> userLogout() async {
   auth.signOut();
+  // ignore: avoid_print
   print('User is logout');
 }
 
@@ -166,9 +173,11 @@ Future<void> googleSignIn() async {
   try {
     await googleSignIn.signIn();
   } catch (error) {
+    // ignore: avoid_print
     print(error);
   }
 
+  // ignore: avoid_print
   print('GOOGLE SIGNIN');
 }
 
@@ -186,6 +195,7 @@ class Authentication {
 
         user = userCredential.user;
       } catch (e) {
+        // ignore: avoid_print
         print(e);
       }
     } else {

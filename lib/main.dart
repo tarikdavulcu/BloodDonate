@@ -199,6 +199,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    // ignore: avoid_print
     print("BACK BUTTON!"); // Do some stuff.
     return true;
   }

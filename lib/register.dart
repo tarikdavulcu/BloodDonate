@@ -205,7 +205,7 @@ import 'package:localstorage/localstorage.dart';
 // }
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  RegisterPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -238,6 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
         storage.clear();
 
         storage.setItem('token', rrr.user);
+        // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -254,6 +255,7 @@ class _RegisterPageState extends State<RegisterPage> {
       //Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       //pop the loading circle
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
 
       genericErrorMessage(e.code);
@@ -271,7 +273,7 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -282,7 +284,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 243, 243, 243),
+      backgroundColor: const Color.fromARGB(255, 243, 243, 243),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -377,6 +379,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           storage.setItem('token', result);
                           //pop the loading circle
                           // Navigator.pop(context);
+                          // ignore: use_build_context_synchronously
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -390,7 +393,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 70,
                     ),
 
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     // apple buttom
                     SquareTile(
                       onTap: () {},

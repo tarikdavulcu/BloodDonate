@@ -26,13 +26,13 @@ class NavDrawer extends StatelessWidget {
                 decoration: const BoxDecoration(color: Color(0xff764abc)),
                 accountName: user!.displayName == null
                     ? Text(
-                        user!.uid.toString(),
+                        user.uid.toString(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       )
                     : Text(
-                        user!.displayName.toString(),
+                        user.displayName.toString(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -43,9 +43,9 @@ class NavDrawer extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                currentAccountPicture: user!.photoURL == null
+                currentAccountPicture: user.photoURL == null
                     ? const FlutterLogo()
-                    : Image.network(user!.photoURL.toString()),
+                    : Image.network(user.photoURL.toString()),
               ),
               ListTile(
                 leading: const Icon(
